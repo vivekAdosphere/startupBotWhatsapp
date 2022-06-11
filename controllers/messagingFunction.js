@@ -17,9 +17,6 @@ const fs = require('fs')
 const Path = require('path');
 const axios = require('axios')
 
-
-
-
 //flagupdator
 let userDataFlagHandler = (number, key, value) => {
 
@@ -87,19 +84,16 @@ exports.dinHandler = async(number, message) => {
 
         //we have to validate din and update flowpath to 3
         if (validator.isNumeric(message)) {
-            console.log("dinhanlder " + message)
             userDataFlagHandler(number, "din", message)
                 //check user is already registered or not
             const registeredUser = await checkIfUserRegistered({ "UserInfo.din": userData.get(number).din })
-            console.log("reg data " + registeredUser)
 
             //data  ==> update 
             if (registeredUser !== null) {
                 await sendTextMessage(number, languageChooser(number).updateData)
                 flowPathIndicator.set(number, "updatedUser")
             } else {
-                console.log(userData.get(number).din)
-                    //save user in database
+                //save user in database
                 await saveUserDetail({ UserInfo: { din: userData.get(number).din } })
                 await sendTextMessage(number, languageChooser(number).askForName)
                 flowPathIndicator.set(number, "3")
@@ -111,7 +105,6 @@ exports.dinHandler = async(number, message) => {
             flowPathIndicator.set(number, "2")
         }
     } catch (err) {
-        // console.log(err)
         logger.error(`Error, ${languageChooser(number).somethingWentWrong}`);
         clearFlags(number)
     }
@@ -134,7 +127,6 @@ exports.existingUserHandler = async(number, message) => {
 
         }
     } catch (err) {
-        console.log(err)
         logger.error(`Error, ${languageChooser(number).somethingWentWrong}`);
         clearFlags(number)
     }
@@ -159,7 +151,6 @@ exports.nameHandlerForStakeHolder = async(number, message) => {
             flowPathIndicator.set(number, "4")
 
         } else {
-            console.log(message)
             await sendTextMessage(number, languageChooser(number).invalidName)
             flowPathIndicator.set(number, "3")
         }
@@ -196,12 +187,10 @@ exports.companyNameHandlerForStakeHolder = async(number, message) => {
 //here we recieve IMAGE as a message
 exports.panCardHandlerForStakeHolder = async(number, message) => {
     try {
-        console.log("From pan card: " + message)
 
         const saveImage = async(message) => {
             try {
                 const url = `${config.API_BASE_URL}/media/${message}`
-                console.log(url)
 
                 const path = Path.resolve(__dirname, 'public', public.jpeg)
                 const response = await axios({
