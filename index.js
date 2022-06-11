@@ -1,11 +1,8 @@
 const express = require('express');
 const config = require("./config/config")
 const helmet = require("helmet");
-const { handleTextMessage, handleInteractiveMessage, handleImageMessage } = require('./controllers/messageHandler');
+const { handleTextMessage, handleImageMessage } = require('./controllers/messageHandler');
 const app = express()
-const dbConnector = require("./functionality/dbConnector")
-const multer = require('multer')
-const upload = multer({ dest: "./public/" })
 
 app.use(helmet())
 app.use(express.json());
@@ -75,5 +72,5 @@ app.post("/webhook", (req, res) => {
 
 app.listen(port, () => {
     console.log(`Bot is listening at ${port}`)
-    dbConnector()
+        // dbConnector()
 })

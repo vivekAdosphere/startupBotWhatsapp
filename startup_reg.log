@@ -963,3 +963,5 @@
 {"level":"error","message":"DB Fetch Error from updating---> {}","timestamp":"6/6/2022, 12:58:16 pm"}
 {"level":"error","message":"DB Fetch Error from updating---> {}","timestamp":"11/6/2022, 7:26:43 pm"}
 {"level":"info","message":"Success,Database conncted Successfully","timestamp":"11/6/2022, 7:26:43 pm"}
+{"level":"error","message":"DB Fetch Error from updating---> {}","timestamp":"11/6/2022, 7:31:50 pm"}
+{"level":"info","message":"Success,Database conncted Successfully","timestamp":"11/6/2022, 7:31:50 pm"}
